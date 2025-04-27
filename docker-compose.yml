@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
 
-  frontend:
+  frontend1:
     build:
       context: ./frontend1
     ports:
@@ -27,9 +27,9 @@ services:
     depends_on:
       - backend
     volumes:
-      - ./frontend:/var/www/html
+      - ./frontend1:/var/www/html
 
-  frontend1:
+  frontend2:
     build:
       context: ./frontend2
     ports:
