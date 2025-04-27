@@ -1,0 +1,20 @@
+{
+    "name": "frontend1",
+    "version": "1.0.0",
+    "description": "Frontend application for project 1",
+    "main": "src/app.js",
+    "scripts": {
+      "start": "live-server src",
+      "build": "echo 'Build script not defined'",
+      "test": "echo 'Test script not defined'"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "some-library": "^1.0.0"
+    },
+    "devDependencies": {
+      "live-server": "^1.2.1"
+    }
+  }
