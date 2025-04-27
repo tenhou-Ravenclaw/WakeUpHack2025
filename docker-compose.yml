@@ -26,6 +26,8 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    volumes:
+      - ./frontend:/var/www/html
 
 networks:
   default:
