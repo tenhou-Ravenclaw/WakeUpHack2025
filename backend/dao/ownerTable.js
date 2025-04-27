@@ -10,11 +10,11 @@ function getOwner(params) {
     
 }
 
-function addBuild(params) {
-    
+function addHoldBuild(params) {
+    // TODO buildTableのaddBuildDataを呼び出す
 }
 
-function deleteBuild(params) {
-    
+function deleteHoldBuild(params) {
+    // TODO deleteTableのaddBuildDataを呼び出す
 }
 

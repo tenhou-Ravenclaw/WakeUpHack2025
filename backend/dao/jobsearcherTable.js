@@ -6,9 +6,9 @@ function deleteJobsercher(params) {
     
 }
 
-function updateJobsercher(params) {
+// function updateJobsercher(params) {
     
-}
+// }
 
 function addWorkJobSearcher(params) {
     
