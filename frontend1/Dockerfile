@@ -22,8 +22,6 @@ FROM nginx:alpine
 # Nginxのデフォルト設定を削除
 RUN rm -rf /usr/share/nginx/html/*
 
-EXPOSE 3000
-
 # ビルド成果物をコピー
 COPY --from=build /app/dist /usr/share/nginx/html
 

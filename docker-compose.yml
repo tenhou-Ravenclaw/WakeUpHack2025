@@ -19,15 +19,25 @@ services:
     depends_on:
       - db
 
-  frontend:
+  frontend1:
     build:
-      context: ./frontend
+      context: ./frontend1
     ports:
       - "3000:80"
     depends_on:
       - backend
     volumes:
-      - ./frontend:/var/www/html
+      - ./frontend1:/var/www/html
+
+  frontend2:
+    build:
+      context: ./frontend2
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend2:/var/www/html
 
 networks:
   default:
