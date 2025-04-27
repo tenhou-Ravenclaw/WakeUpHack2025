@@ -4,9 +4,9 @@
     "description": "Frontend application for project 1",
     "main": "src/app.js",
     "scripts": {
-      "start": "live-server src",
-      "build": "echo 'Build script not defined'",
-      "test": "echo 'Test script not defined'"
+      "start": "react-scripts start --host 0.0.0.0",
+      "build": "react-scripts build",
+      "test": "react-scripts test"
     },
     "keywords": [],
     "author": "",
