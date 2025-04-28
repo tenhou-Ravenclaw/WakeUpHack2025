@@ -14,6 +14,7 @@ const ReportRegistrationDetailPage = () => {
         titleName={"【報告書を登録する】"}
         subTitleName={"物件詳細"}
         buttonLabel={"一覧へ戻る"}
+        listPath={"/mypage/report/register"}
       />
       <div className="detail-container">
         <BuildDetailCard />

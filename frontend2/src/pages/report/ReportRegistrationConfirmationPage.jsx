@@ -26,6 +26,7 @@ const ReportRegistrationConfirmationPage = () => {
       <UpperBar
         titleName={"【報告書を登録する】"}
         subTitleName={"物件詳細(確認画面)"}
+        buttonLabel={"前のページに戻る"}
       />
       <div className="preview-container">
         <PreviewCard

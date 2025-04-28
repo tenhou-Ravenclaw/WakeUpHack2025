@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import "./buildDetailCard.css";
 
-const BuildDetailCard = ({
-  image,
+/**
+ * 物件詳細カードコンポーネント（画像1枚版＋購入志望欄付き）
+ */
+const BuildDetailBuyCard = ({
+  image, // 画像URL
   address,
   cleaningFrequency,
   rooms,
@@ -11,28 +13,18 @@ const BuildDetailCard = ({
   abandonmentHistory,
   saleIntent,
   agents = [],
+  ownerReplyMessage = null, // ★オーナーのメッセージ（追加）
 }) => {
-  const navigate = useNavigate();
-  const fileInputRef = useRef(null); // ファイルinputを参照できるようにする
-
-  const handleSubmit = () => {
-    const file = fileInputRef.current?.files[0];
-    if (file) {
-      navigate("/mypage/report/confirmation");
-    } else {
-      alert("ファイルが添付されていません。");
-    }
-  };
-
   return (
     <div className="build-detail-card">
-      {/* 画像エリア */}
+      {/* 左側：画像 */}
       <section className="build-detail-card-left">
         <img src={image} alt="建物画像" className="build-detail-card-img" />
       </section>
 
-      {/* 右側エリア */}
+      {/* 右側：情報 */}
       <section className="build-detail-card-right">
+        {/* 物件情報 */}
         <div className="detail-property-info">
           <div><strong>住所:</strong> {address}</div>
           <div><strong>希望掃除頻度:</strong> {cleaningFrequency}</div>
@@ -42,37 +34,35 @@ const BuildDetailCard = ({
           <div><strong>売却意思:</strong> {saleIntent}</div>
         </div>
 
+        {/* 横線 */}
         <div className="build-detail-card-divider" />
 
+        {/* 担当者リスト */}
         <div className="detail-person-info">
           <div className="detail-person-label">【担当者】</div>
           <div className="agent-list">
             {agents.map((agent, index) => (
               <div key={index} className="agent-item">
-                <label htmlFor={`agent-${index}`}>{agent}</label>
+                <label>{agent}</label>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="upload-section">
-          <label htmlFor="report-upload" className="upload-label">
-            報告書アップロード
-          </label>
-          <input
-            type="file"
-            id="report-upload"
-            className="upload-input"
-            ref={fileInputRef} // ここポイント！
-          />
+        {/* 現在購入志望物件に対するオーナー返答 */}
+        <div className="buy-status-box">
+          <span className="info-label">ステータス：</span>
+          <div className="owner-reply-message">
+            {ownerReplyMessage ? (
+              <>オーナーからメッセージ: 「{ownerReplyMessage}」</>
+            ) : (
+              <>オーナーに確認中です</>
+            )}
+          </div>
         </div>
-
-        <button className="submit-button" onClick={handleSubmit}>
-          確認する
-        </button>
       </section>
     </div>
   );
 };
 
-export default BuildDetailCard;
+export default BuildDetailBuyCard;

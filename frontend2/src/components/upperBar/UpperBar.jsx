@@ -6,25 +6,22 @@ import "./upperComponents.css";
 
 /**
  * 画面上部表示コンテンツ
- * @param titleName 最左上表示の白文字タイトルを指定
- * @param subTitleName 左上表示表示の黒文字タイトルを表示
- * @param buttonLabel 戻るボタンに表示するラベル
- * @returns 
+ * @param {string} titleName - 最左上表示の白文字タイトル
+ * @param {string} subTitleName - 左上表示の黒文字サブタイトル
+ * @param {string} buttonLabel - 戻るボタンに表示するラベル
+ * @param {string} [listPath] - 「一覧へ戻る」時の遷移先パス（オプション）
  */
-
-const UpperBar = ({ titleName, subTitleName, buttonLabel }) => {
+const UpperBar = ({ titleName, subTitleName, buttonLabel, listPath }) => {
   return (
-    <>
-      <div className="background-rectangle">
-        <h1 className="title">{titleName}</h1>
+    <div className="background-rectangle">
+      <h1 className="title">{titleName}</h1>
 
-        {/* buttonLabel が null または undefined の場合に BackButton を表示しない */}
-        {buttonLabel && <BackPageButton buttonLabel={buttonLabel} />}
+      {/* buttonLabel がある場合のみ表示 */}
+      {buttonLabel && <BackPageButton buttonLabel={buttonLabel} listPath={listPath} />}
 
-        <BackToMyPageButton />
-        <SubTitle subTitleName={subTitleName} />
-      </div>
-    </>
+      <BackToMyPageButton />
+      <SubTitle subTitleName={subTitleName} />
+    </div>
   );
 };
 

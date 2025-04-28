@@ -8,7 +8,6 @@ import JobSeacherEditPage                         from "./pages/jobsearcher/JobS
 import JobSearcherDetailPage                      from "./pages/jobsearcher/JobSearcherDetailPage";  // 詳細ページ
 import JobSearcherRegisterPage                    from "./pages/jobsearcher/JobSearcherRegisterPage";  // 登録ページ
 import ReportRegistrationConfirmationPage         from "./pages/report/ReportRegistrationConfirmationPage";  // 報告書確認ページ
-import ReportRegistrationConfirmationPage_wanted  from "./pages/report/ReportRegistrationConfirmationPage_wanted";  // 別報告書確認ページ
 import ReportRegistrationDetailPage               from "./pages/report/ReportRegistrationDetailPage";  // 報告書詳細ページ
 import ReportRegistrationPage                     from "./pages/report/ReportRegistrationPage";  // 報告書登録ページ
 import BuildSaleDetailPage                        from "./pages/sale/BuildSaleDetailPage";  // 物件売買詳細ページ
@@ -27,11 +26,10 @@ function App() {
         <Route path="/mypage/jobsearcher/detail"         element={<JobSearcherDetailPage />} />
         <Route path="/mypage/jobsearcher/register"       element={<JobSearcherRegisterPage />} />
         <Route path="/mypage/report/confirmation"        element={<ReportRegistrationConfirmationPage />} />
-        <Route path="/mypage/report/confirmation_wanted" element={<ReportRegistrationConfirmationPage_wanted />} />
         <Route path="/mypage/report/detail"              element={<ReportRegistrationDetailPage />} />
         <Route path="/mypage/report/register"            element={<ReportRegistrationPage />} />
         <Route path="/mypage/sale/detail"                element={<BuildSaleDetailPage />} />
-        <Route path="/mypage/sale"                       element={<BuildSalePage />} />
+        <Route path="/mypage/sale/"                       element={<BuildSalePage />} />
       </Routes>
     </Router>
     {/*<h1>Hello World</h1>

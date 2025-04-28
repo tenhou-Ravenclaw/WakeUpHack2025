@@ -25,7 +25,7 @@ const JobSearcherDetailPage = () => {
   const handleEditClick = () => {
     navigate('/mypage/jobsearcher/edit', { state: jobSearcherData });
   };
-  
+
   // 削除ボタンがクリックされたときにコンソールに削除メッセージ
   const handleDeleteClick = () => {
     console.log("削除ボタンがクリックされました");
@@ -39,6 +39,7 @@ const JobSearcherDetailPage = () => {
         titleName={"【詳細ページ】"} 
         subTitleName={"被就職支援者詳細"} 
         buttonLabel={"一覧へ戻る"} 
+        listPath={"/mypage/jobsearcher"}
       />
 
       <div className='job-searcher-detail-buttons'>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Linkをインポート
 import "./JobSearcherDetailCard.css"; // CSSファイルをインポート
 
 /**
@@ -8,12 +9,11 @@ import "./JobSearcherDetailCard.css"; // CSSファイルをインポート
  * @returns 
  */
 const JobSearcherDetailCard = ({ jobSearcher }) => {
-  const [selectedTransport, setSelectedTransport] = useState(jobSearcher.transport); // 移動手段の選択状態
+  const [selectedTransport, setSelectedTransport] = useState(jobSearcher.transport);
 
-  // 移動手段のチェックボックスがクリックされたときの処理
   const handleTransportChange = (event) => {
     const { value, checked } = event.target;
-    setSelectedTransport((prevTransport) => 
+    setSelectedTransport((prevTransport) =>
       checked ? [...prevTransport, value] : prevTransport.filter((item) => item !== value)
     );
   };
@@ -42,6 +42,7 @@ const JobSearcherDetailCard = ({ jobSearcher }) => {
           <span className="info-label">活動範囲：</span>
           <span>{jobSearcher.activityRange}</span>
         </div>
+
         <div className="info-item">
           <span className="info-label">移動手段：</span>
           <div className="transport-options">
@@ -58,6 +59,21 @@ const JobSearcherDetailCard = ({ jobSearcher }) => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* ★ここ、リンク付きで表示する */}
+        <div className="info-item">
+          <span className="info-label">購入志望物件：</span>
+          {jobSearcher.buyingPropertyId ? (
+            <Link 
+              to={`/mypage/building/detail/${jobSearcher.buyingPropertyId}`} 
+              className="property-link"
+            >
+              {jobSearcher.buyingPropertyId}
+            </Link>
+          ) : (
+            <span>未設定</span>
+          )}
         </div>
       </div>
     </div>

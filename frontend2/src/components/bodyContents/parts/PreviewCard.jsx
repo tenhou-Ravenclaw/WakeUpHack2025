@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./previewCard.css";
 
 const PreviewCard = ({
@@ -12,6 +13,11 @@ const PreviewCard = ({
   agents = [],
   uploadedFile, // 親から渡されたアップロードされたファイル
 }) => {
+    const navigate = useNavigate(); // useNavigate フックを使ってリダイレクト
+
+    const handleSubmit = () => {
+        navigate("/mypage/report/register"); 
+    }
   return (
     <div className="preview-card">
       {/* 画像エリア（左側） */}
@@ -58,7 +64,7 @@ const PreviewCard = ({
         )}
 
         {/* 提出ボタン */}
-        <button className="preview-submit-button">登録する</button>
+        <button className="preview-submit-button" onClick={handleSubmit}>登録する</button>
       </section>
     </div>
   );

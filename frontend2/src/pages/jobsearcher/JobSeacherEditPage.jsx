@@ -62,6 +62,7 @@ const JobSearcherEditPage = () => {
         titleName={"【編集ページ】"}
         subTitleName={"被就職支援者編集"}
         buttonLabel={"一覧へ戻る"}
+        listPath={"/mypage/jobsearcher"}
       />
       <div className="job-searcher-edit-page">
         <div className="edit-form">
@@ -120,6 +121,18 @@ const JobSearcherEditPage = () => {
                 </div>
               ))}
             </div>
+          </div>
+          
+          {/* ★ここに購入志望物件IDの入力欄を追加 */}
+          <div className="form-item">
+            <label>購入志望物件ID：</label>
+            <input
+              type="text"
+              name="buyingPropertyId"
+              value={jobSearcher.buyingPropertyId}
+              onChange={handleChange}
+              placeholder="例: 12345"
+            />
           </div>
 
           <div className="form-buttons">
