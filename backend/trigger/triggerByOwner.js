@@ -1,5 +1,5 @@
 const { addBuildData, deleteBuildData, deleteWorker, notificationDeleteBuildDate } = require('../dao/buildTable');
-const { getOwner, addOwner } = require('../dao/ownerTable');
+const { getOwnerByEmail, addOwner } = require('../dao/ownerTable');
 
 const { needHumanNum } = require('../algorythm/needHumanNum');
 const { mattingBetweenWorksearcherAndBuild } = require('../algorythm/matting');
@@ -58,38 +58,45 @@ function onPurchaseApprovedTrigger(buildId,jobSercherId) {
 }
 
 // サインアップようのトリガー
-function signUpTrigger(
-    name,
-    birthday,
-    payWay,
-    pwd,
-    mailAddress
-) {
-    // オーナーのサインアップ
-    addOwner(
-        name,
-        birthday,
-        payWay,
-        pwd,
-        mailAddress
-    )
+async function signUpTrigger(name, birthday, payWay, pwd, mailAddress) {
+    try {
+        const result = await addOwner(
+            name,
+            birthday,
+            payWay,
+            pwd,
+            mailAddress
+        );
+        console.log('サインアップ成功:', result);
+        return { success: true, result };
+    } catch (error) {
+        console.error('サインアップエラー:', error);
+        return { success: false, error };
+    }
 }
 
+
 // ログイン用のトリガー
-function loginTrigger(
-    mailAddress,
-    pwd
-) {
-    // オーナーのログイン
-    const owner = getOwner(
-        mailAddress,
-        pwd
-    )
-    if (owner) {
-        return true;
+async function loginTrigger(mailAddress, pwd) {
+    try {
+        const owner = await getOwnerByEmail(mailAddress);
+        
+        if (!owner) {
+            return false;
+        }
+
+        // パスワードチェック
+        if (owner.PWD === pwd) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('ログイントリガーエラー:', error);
+        return false;
     }
-    return false;
 }
+
 
 module.exports = {
     onPropertyRegistered, 

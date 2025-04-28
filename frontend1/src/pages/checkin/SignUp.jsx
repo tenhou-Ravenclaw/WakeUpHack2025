@@ -35,7 +35,7 @@ export default function SignUpPage() {
     const requestData = {
       name: `${form.lastName} ${form.firstName}`,
       birthday: form.birthDate,
-      payWay: null,
+      payWay: 1,
       pwd: form.password,
       mailAddress: form.email,
     };

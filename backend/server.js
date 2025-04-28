@@ -155,11 +155,11 @@ app.post('/trigger/purchase-approved', (req, res) => {
 });
 
 // サインアップ用のトリガー
-app.post('/trigger/sign-up', (req, res) => {
+app.post('/trigger/sign-up', async (req, res) => {
     console.log('サインアップ');
     const { name, birthday, payWay, pwd, mailAddress } = req.body;
     try {
-        signUpTrigger(name, birthday, payWay, pwd, mailAddress);
+        await signUpTrigger(name, birthday, payWay, pwd, mailAddress);
         res.status(200).json({ message: 'Sign up processed successfully' });
     } catch (error) {
         console.error(error);
@@ -167,11 +167,11 @@ app.post('/trigger/sign-up', (req, res) => {
     }
 });
 // ログイン用のトリガー
-app.post('/trigger/login', (req, res) => {
+app.post('/trigger/login', async (req, res) => {
     console.log('ログイン');
     const { email, password } = req.body;
     try {
-        loginTrigger(email, password);
+        await loginTrigger(email, password);
         res.status(200).json({ message: 'Login processed successfully' });
     } catch (error) {
         console.error(error);
