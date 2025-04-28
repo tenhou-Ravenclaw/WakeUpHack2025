@@ -10,14 +10,23 @@ services:
       MYSQL_DATABASE: mydatabase
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build:
       context: ./backend
     ports:
       - "5001:5000"
+    environment:
+      - PORT=5000
+      - DB_HOST=db # データベースサービス名
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   frontend1:
     build:
