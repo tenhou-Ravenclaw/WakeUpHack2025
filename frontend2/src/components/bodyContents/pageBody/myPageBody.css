@@ -35,6 +35,7 @@
     font-size: 18px; /* フォントサイズ */
     font-weight: 700; /* フォント太さ */
     position: absolute; /* 位置を絶対指定 */
+    text-decoration: underline;
     top: 100px; /* 親要素（mypage-container）から20px下 */
     right: 100px; /* 親要素（mypage-container）から20px右 */
     cursor: pointer; /* マウスカーソルをポインタに */

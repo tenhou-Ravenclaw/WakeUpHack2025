@@ -1,4 +1,5 @@
 import React from 'react';
+import "./upperComponents.css";
 
 /**
  * 毎ページに表示される左上らへんの黒字サブタイトルパーツ

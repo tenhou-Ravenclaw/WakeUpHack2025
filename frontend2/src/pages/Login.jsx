@@ -1,6 +1,6 @@
 import React from 'react';
-import SubTitle from '../components/upperBar/SubTitle'; // サブタイトルコンポーネントをインポート
-import LoginBody from '../components/bodyContents/pageBody/LoginBody'; // ログインボディコンポーネントをインポート
+import LoginBody from '../components/bodyContents/pageBody/LoginBody';
+import SubTitle from '../components/upperBar/SubTitle';
 
 /**
  * ログインページ
@@ -9,8 +9,8 @@ import LoginBody from '../components/bodyContents/pageBody/LoginBody'; // ログ
 const Login = () => {
   return (
     <div>
-      <SubTitle subTitleName="法人向けログイン" />
-      <LoginBody /> {/* ログインの詳細コンテンツを表示 */}
+      <SubTitle subTitleName={"法人向けログイン"}/>
+      <LoginBody />
     </div>
   );
 };
