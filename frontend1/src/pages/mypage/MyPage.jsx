@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderComponent from "../../components/Header"
 
-const MyPageButtom = ({children}) => {
+const MyPageButtom = ({children, herf}) => {
     const style = {
         display: 'flex',
         width: '852px',
@@ -19,7 +19,7 @@ const MyPageButtom = ({children}) => {
         whiteSpace: 'nowrap', // Prevent text wrapping
         margin: '30px'
     }
-    return <button style={style}>{children}</button>
+    return <button style={style} onClick={() => window.location.href = herf}>{children}</button>
 }
 
 const MyPage = () => {
@@ -44,10 +44,10 @@ const MyPage = () => {
                 <p style={titleStyle}>マイページ</p>
             </HeaderComponent>
             <main style={mainStyle}>
-                <MyPageButtom>報告書の確認</MyPageButtom>
-                <MyPageButtom>物件の登録</MyPageButtom>
-                <MyPageButtom>登録物件の変更</MyPageButtom>
-                <MyPageButtom>アカウント情報の変更</MyPageButtom>
+                <MyPageButtom herf="./mypage/reportlist">報告書の確認</MyPageButtom>
+                <MyPageButtom herf="/mypage/setbuild">物件の登録</MyPageButtom>
+                <MyPageButtom herf="/mypage/setbuild">登録物件の変更</MyPageButtom>
+                <MyPageButtom herf="/mypage">アカウント情報の変更</MyPageButtom>
             </main>
         </div>
     );

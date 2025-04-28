@@ -24,6 +24,20 @@ const ReportList = () => {
         border: '1px solid #ccc',
         padding: '10px'
     }
+
+    const buttonStyle = {
+        width: '298px',
+        height: '52px',
+        background: '#261CEA',
+        borderRadius: 20
+    }
+    const buttonTextStyle = {
+        color: 'white', 
+        fontSize: 32, 
+        fontFamily: 'Inter', 
+        fontWeight: '400', 
+        wordWrap: 'break-word'
+    }
     return (
         <div>
             <HeaderComponent>
@@ -38,6 +52,10 @@ const ReportList = () => {
                         <li>Report 2</li>
                         <li>Report 3</li>
                     </ul>
+                    <button style={buttonStyle} onClick={() => window.location.href = "/mypage"}>
+                        <span style={buttonTextStyle}>マイページに戻る</span>
+                    </button>
+
                 </div>
                 <div style={reportStyle}>
                     <img src="https://via.placeholder.com/300" alt="Report Preview" style={reportImageStyle}/>
