@@ -1,5 +1,8 @@
 'use client';
 
+import HeaderComponent from "../../components/Header"
+
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,6 +28,11 @@ export default function OwnerLoginPage() {
   
 
   return (
+    <>
+    <HeaderComponent>
+        <img src="LogIn.png" alt="画像エラー" style={{width:"60px"}}/>
+        <p style={{ fontSize: '48px' }}>ログイン</p>
+    </HeaderComponent>
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
       
       {/* オーナー様タイトル */}
@@ -100,6 +108,7 @@ export default function OwnerLoginPage() {
         </div>
       )}
     </div>
+    </>
   );
 }
 

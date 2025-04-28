@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // 画面遷移用
 
+import HeaderComponent from "../../components/Header"
+
 export default function SignUpPage() {
   const [form, setForm] = useState({
     lastName: '',
@@ -34,6 +36,11 @@ export default function SignUpPage() {
   };
 
   return (
+    <>
+    <HeaderComponent>
+        <img src="SignUp.png" alt="画像エラー" style={{width:"60px"}}/>
+        <p style={{ fontSize: '48px' }}>入会</p>
+    </HeaderComponent>
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '40px 20px' }}>
       <form onSubmit={handleRegister}>
         <div style={formItemStyle}>
@@ -91,6 +98,7 @@ export default function SignUpPage() {
         </button>
       </div>
     </div>
+    </>
   );
 }
 
