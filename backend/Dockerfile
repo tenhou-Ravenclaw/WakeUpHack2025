@@ -9,6 +9,9 @@ COPY package*.json ./
 # Install production dependencies
 RUN npm install --production
 
+# Install mysql2 package
+RUN npm install mysql2
+
 # Copy the rest of the application code
 COPY . .
 
