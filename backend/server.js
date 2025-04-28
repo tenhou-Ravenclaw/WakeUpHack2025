@@ -182,3 +182,22 @@ app.post('/trigger/login', async (req, res) => {
         res.status(500).json({ error: 'Failed to process login' });
     }
 });
+
+// ownerIdから報告書一覧を取得するトリガー
+app.get('/trigger/reports/:ownerId', async (req, res) => {
+    const { ownerId } = req.params;
+    const getBuildIdByOwnerIds = require('./algorythm/build');
+    const viewReport = require('./algorythm/report');
+    try {
+        const buildIds = await getBuildIdByOwnerIds(ownerId);
+        let reports = [];
+        buildIds.forEach(async buildId => {
+            const report = await viewReport(buildId);// 非同期処理を待つ
+            reports.push(report);
+        }); 
+        res.status(200).json({ reports });
+    } catch (error) {
+        console.error(`報告書取得中にエラーが発生しました (ownerId: ${ownerId}):`, error);
+        res.status(500).json({ error: 'Failed to fetch reports' });
+    }
+});

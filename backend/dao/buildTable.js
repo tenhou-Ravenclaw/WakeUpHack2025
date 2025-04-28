@@ -180,11 +180,31 @@ function getAllBuilds() {
     });
 }
 
+function getBuildIdByOwnerIds(ownerIds) {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT ownerId, buildId FROM build WHERE ownerId IN (?) AND deleteFlag = false`;
+        db.query(query, [ownerIds], (err, results) => {
+            if (err) {
+                console.error('オーナーIDリストによる建物ID取得エラー:', err);
+                return reject(err);
+            }
+            const groupedResults = results.reduce((acc, row) => {
+                if (!acc[row.ownerId]) {
+                    acc[row.ownerId] = [];
+                }
+                acc[row.ownerId].push(row.buildId);
+                return acc;
+            }, {});
+            resolve(groupedResults);
+        });
+    });
+}
 module.exports = {
     addBuildData,
     deleteBuildData,
     addWorker,
     deleteWorker,
     getBuildData,
-    getAllBuilds
+    getAllBuilds,
+    getBuildIdByOwnerIds
 };
