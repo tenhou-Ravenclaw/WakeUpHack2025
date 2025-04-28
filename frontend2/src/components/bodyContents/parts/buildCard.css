@@ -38,10 +38,8 @@
   /* 物件情報と担当者エリア */
   .build-card-info {
     display: flex;
-    justify-content: space-between; /* 左右に分ける */
     gap: 20px;
     flex-grow: 1;
-    margin-left: 20px;
     padding-left: 20px; /* 縦線から20pxの距離を作る */
   }
   
@@ -49,13 +47,14 @@
   .property-info {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* 行間を少し広げる */
+    gap: 2px; /* 行間を少し広げる */
     font-size: 14px;
     max-width: 480px; /* 左側（物件情報）の幅を調整 */
   }
   
   /* 担当者情報エリア */
   .person-info {
+    padding-left: 150px;
     display: flex;
     flex-direction: column;
     gap: 10px; /* 行間を少し広げる */

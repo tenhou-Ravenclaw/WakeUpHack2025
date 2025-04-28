@@ -23,6 +23,8 @@ const BuildCard = ({ imageSrc, address, cleaningFrequency, rooms, area, abandonm
           <div><strong>売却意思:</strong> {saleIntent}</div>
         </div>
         
+        <div className="build-card-divider"/>
+
         {/* 担当者情報 */}
         <div className="person-info">
           <div className="person-label">【担当者】</div>
@@ -32,6 +34,11 @@ const BuildCard = ({ imageSrc, address, cleaningFrequency, rooms, area, abandonm
             ))}
           </div>
         </div>
+      </div>
+
+      {/* 右端に配置されるボタンエリア */}
+      <div className="button-area">
+        <button className="action-button">詳細</button>
       </div>
     </div>
   );
