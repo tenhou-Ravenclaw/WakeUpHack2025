@@ -1,5 +1,8 @@
 const nodemailer = require('nodemailer');
 const { getOwner } = require('../dao/ownerTable');
+const { getNPOData } = require('../dao/NPOTable');
+const { getJobSearcher } = require('../dao/jobsearcherTable');
+const { getBuildData } = require('../dao/buildTable');
 
 async function contactOwner(ownerId, subject, message) { //引数(ユーザーid,メッセージ)
     // オーナーと連絡を取る

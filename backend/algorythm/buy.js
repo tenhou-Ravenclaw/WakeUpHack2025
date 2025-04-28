@@ -1,3 +1,6 @@
+const { wantHomeJobSearcher } = require('../dao/jobsearcherTable');
+const { getBuildData } = require('../dao/buildTable');
+
 function onPropertySold(buildId,jobSercherId) {
     // 購入希望が出た際の処理
     // オーナーにメールを送る

@@ -1,3 +1,6 @@
+const { getBuildById } = require('../dao/buildTable');
+const { getJobSearchers } = require('../dao/jobsearcherTable');
+const { contactNPOForWorkBuild } = require('./contact');
 /**
  * 
  * @param {int} buildId 
@@ -34,7 +37,7 @@ async function mattingBetweenWorksearcherAndBuild(buildId,requiredPeople) {
 
     // NPOに送信
     if (selectedWorksearchers.length > 0) {
-        await contactNPOForWorkBuild({ buildId, selectedWorksearchers });
+        contactNPOForWorkBuild({ buildId, selectedWorksearchers });
     }
 
     return { buildId, mattchWorksearcher: selectedWorksearchers };

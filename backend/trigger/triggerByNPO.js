@@ -1,5 +1,9 @@
-const { agreeWorkBuildByNPO } = require('./algorthm/agreeWork')
-const { addJobsercher } = require('../dao/addJobsercher');
+const { agreeWorkBuildByNPO } = require('../algorythm/agreeWork')
+const { onPropertySold } = require('../algorythm/buy')
+
+const { addJobsercher } = require('../dao/jobsearcherTable');
+const { addReport } = require('../dao/report')
+const { deleteWorkJobSearcher } = require('../dao/jobsearcherTable')
 
 // 被修飾希望者の登録
 function registerJobSercher(name, birthday, sex, rangeOfBehivior, transportation, isEmployed, wantedBuildId, assignedBuildId, NPOId) {

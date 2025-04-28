@@ -1,7 +1,9 @@
-const { addBuildData } = require('./dao/buildTable');
-const { needHumanNum } = require('./algorythm/needHumanNum');
-const { mattingBetweenWorksearcherAndBuild } = require('./algorythm/matting');
+const { addBuildData, deleteBuildData, deleteWorker, notificationDeleteBuildDate } = require('../dao/buildTable');
 
+const { needHumanNum } = require('../algorythm/needHumanNum');
+const { mattingBetweenWorksearcherAndBuild } = require('../algorythm/matting');
+const { WorkBuildByOwner } = require('../algorythm/agreeWork')
+const { onPurchaseApproved } = require('../algorythm/buy')
 // 物件が登録された際のトリガー
 function onPropertyRegistered(
     ownerId,
