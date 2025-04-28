@@ -1,14 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+//import React, { useState } from 'react';
+import UpperBar from './components/upperBar/UpperBar';  // UpperBarをインポート
+import BodyContents from './components/bodyContents/BodyContents';  // BodyContentsをインポート
 
-function App() {
+// React Router DOMをインポート（ページ遷移用）
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Login from './pages/Login'; // ログインページのインポート
+import MyPage from './pages/MyPage';
+
+const App = () => {
+  //const [buttonLabel, setButtonLabel] = useState('戻る');
+
   return (
-    <>
-      <h1>This is Page 2!!</h1>
-    </>
-  )
-}
+    //<Login/>
+    <MyPage/>
+  );
+};
 
-export default App
+export default App;
