@@ -38,6 +38,7 @@ export default function OwnerLoginPage() {
       })
       .then((data) => {
       console.log('ログイン成功:', data);
+      localStorage.setItem('ownerId', data.ownerId);
       navigate('/mypage');
       })
       .catch((error) => {

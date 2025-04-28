@@ -118,13 +118,13 @@ async function loginTrigger(mailAddress, pwd) {
 
         // パスワードチェック
         if (owner.PWD === pwd) {
-            return true;
+            return owner.ownerId;
         } else {
-            return false;
+            return -1;
         }
     } catch (error) {
         console.error('ログイントリガーエラー:', error);
-        return false;
+        return -1;
     }
 }
 

@@ -172,8 +172,8 @@ app.post('/trigger/login', async (req, res) => {
     console.log(`ログイン処理中: ${email}, ${password}`);
     try {
         const isLoggedIn = await loginTrigger(email, password); // 非同期処理を待つ
-        if (isLoggedIn) {
-            res.status(200).json({ message: 'Login successful' });
+        if (isLoggedIn>0) {
+            res.status(200).json({ message: 'Login successful',ownerId: isLoggedIn });
         } else {
             res.status(401).json({ error: 'Invalid email or password' });
         }
