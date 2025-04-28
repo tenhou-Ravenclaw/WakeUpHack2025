@@ -1,29 +1,39 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./previewCard.css";
 
-const PreviewCard = ({
-  images = [],
-  address,
-  cleaningFrequency,
-  rooms,
-  area,
-  abandonmentHistory,
-  saleIntent,
-  agents = [],
-  uploadedFile, // 親から渡されたアップロードされたファイル
-}) => {
-    const navigate = useNavigate(); // useNavigate フックを使ってリダイレクト
+const PreviewCard = () => {
+  const location = useLocation(); // useLocation フックで渡された状態を受け取る
+  const navigate = useNavigate(); // useNavigate フックを使ってリダイレクト
 
-    const handleSubmit = () => {
-        navigate("/mypage/report/register"); 
+  // location.state から必要なデータを抽出
+  const {
+    uploadedFile, // アップロードされたファイル
+    address,
+    cleaningFrequency,
+    rooms,
+    area,
+    abandonmentHistory,
+    saleIntent,
+    agents
+  } = location.state || {};
+
+  const handleSubmit = () => {
+    if (!uploadedFile) {
+      alert("ファイルがアップロードされていません");
+      return;
     }
+
+    // ファイルがある場合、登録画面へ遷移
+    navigate("/mypage/report/register"); 
+  };
+
   return (
     <div className="preview-card">
       {/* 画像エリア（左側） */}
       <section className="preview-card-left">
         <img
-          src={images[0]} // 最初の画像を表示
+          src={uploadedFile ? URL.createObjectURL(uploadedFile) : "/path/to/default-image.jpg"} // アップロードされたファイルのプレビュー
           alt="物件画像"
           className="preview-card-img"
         />
@@ -31,7 +41,7 @@ const PreviewCard = ({
 
       {/* 右側エリア */}
       <section className="preview-card-right">
-        {/* 物件情報エリア（上部） */}
+        {/* 物件情報エリア */}
         <div className="preview-property-info">
           <div><strong>住所:</strong> {address}</div>
           <div><strong>希望掃除頻度:</strong> {cleaningFrequency}</div>
@@ -44,11 +54,11 @@ const PreviewCard = ({
         {/* 横線 */}
         <div className="preview-card-divider" />
 
-        {/* 担当者情報エリア（中部） */}
+        {/* 担当者情報エリア */}
         <div className="preview-person-info">
           <div><strong>担当者:</strong></div>
           <div className="agent-list">
-            {agents.map((agent, index) => (
+            {agents && agents.map((agent, index) => (
               <div key={index} className="agent-item">
                 <label>{agent}</label>
               </div>
