@@ -1,0 +1,95 @@
+/* 物件カードのベーススタイル */
+.build-detail-card {
+    width: 80vw;
+    height: 70vh;
+    border-radius: 20px;
+    border: 4.5px solid rgba(0, 173, 173, 0.60);
+    background: #EFF;
+    box-shadow: 4px 4px 4px 0px rgba(0, 207, 207, 0.25);
+    display: flex;  /* 子要素をflexboxで配置 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 画像スタイル */
+.build-detail-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid black;
+    background-color: white;
+  }
+
+/* 縦線 */
+.build-detail-card-divider {
+    position: absolute;
+    left: 54%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 350px;
+    background: rgba(0, 173, 173, 0.60);
+    border-radius: 2px;
+}
+
+/* 物件情報と担当者エリア */
+.build-detail-card-info {
+    display: flex;
+    flex-grow: 1;
+    padding-left: 20px; /* 縦線から20pxの距離を作る */
+    padding-top: 20px;
+    align-items: flex-start; /* 上寄せ */
+}
+
+/* 物件情報エリア */
+.detail-property-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 18px;
+    max-width: 480px; /* 左側（物件情報）の幅を調整 */
+}
+
+/* 担当者情報エリア */
+.detail-person-info {
+    padding-left: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* 行間を少し広げる */
+    font-size: 18px;
+}
+
+/* 担当者ラベル */
+.detail-person-label {
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+}
+
+.main-swiper {
+    width: 255px;
+    height: 255px;
+    margin-bottom: 20px;
+  }
+  
+  .thumbs-swiper {
+    width: 255px;
+    height: 70px; /* サムネイルは高さを小さく */
+  }
+  
+  
+  .thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid #aaa;
+    cursor: pointer;
+  }
+  
+  .build-detail-card-left {
+    display: flex;
+    flex-direction: column; /* ←これが超重要！！ */
+    align-items: center;
+    width: 255px; /* 固定したいなら */
+  }
+  

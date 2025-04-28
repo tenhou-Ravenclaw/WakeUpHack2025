@@ -1,7 +1,7 @@
 import React from "react";
 import UpperBar from "../../components/upperBar/UpperBar";
 import BuildCard from "../../components/bodyContents/parts/BuildCard";
-import "./BuildManagePage.css";
+import "./buildManagePage.css";
 
 /**
  * 物件管理担当を確認するページ(物件一覧)
@@ -16,9 +16,13 @@ const BuildManagePage = () => {
       />
       <div className="build-card-container">
         {/* BuildCard を 3 回表示 */}
-        <BuildCard />
-        <BuildCard />
-        <BuildCard />
+        <BuildCard showManageButtons={true}/>
+        <BuildCard showManageButtons={true}/>
+        <BuildCard showManageButtons={true}/>
+        <BuildCard showManageButtons={true}/>
+        <BuildCard showManageButtons={true}/>
+        <BuildCard showManageButtons={true}/>
+        <BuildCard showManageButtons={true}/>
       </div>
     </>
   );
