@@ -17,5 +17,16 @@ connection.connect((err) => {
   console.log('データベースに接続しました');
 });
 
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'mydatabase',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+module.exports = pool.promise();
 // 必要に応じてエクスポート
 module.exports = connection;

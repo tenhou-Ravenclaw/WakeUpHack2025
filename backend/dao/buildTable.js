@@ -1,13 +1,13 @@
 const db = require('../connectDB');
 
-function addBuildData(buildId, ownerId, location, roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) {
+function addBuildData(ownerId, location, roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) {
     return new Promise((resolve, reject) => {
         const query = `
             INSERT INTO build 
-            (buildId, ownerId, location, roomSize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (ownerId, location, roomSize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
-        const values = [buildId, ownerId, JSON.stringify(location), roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag];
+        const values = [ ownerId, JSON.stringify(location), roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag];
 
         db.query(query, values, (err, results) => {
             if (err) {
@@ -180,11 +180,31 @@ function getAllBuilds() {
     });
 }
 
+function getBuildIdByOwnerIds(ownerIds) {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT ownerId, buildId FROM build WHERE ownerId IN (?) AND deleteFlag = false`;
+        db.query(query, [ownerIds], (err, results) => {
+            if (err) {
+                console.error('オーナーIDリストによる建物ID取得エラー:', err);
+                return reject(err);
+            }
+            const groupedResults = results.reduce((acc, row) => {
+                if (!acc[row.ownerId]) {
+                    acc[row.ownerId] = [];
+                }
+                acc[row.ownerId].push(row.buildId);
+                return acc;
+            }, {});
+            resolve(groupedResults);
+        });
+    });
+}
 module.exports = {
     addBuildData,
     deleteBuildData,
     addWorker,
     deleteWorker,
     getBuildData,
-    getAllBuilds
+    getAllBuilds,
+    getBuildIdByOwnerIds
 };
