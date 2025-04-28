@@ -27,5 +27,8 @@ EXPOSE 3000
 # ビルド成果物をコピー
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Nginx設定ファイルをコピー
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Nginxを起動
 CMD ["nginx", "-g", "daemon off;"]
