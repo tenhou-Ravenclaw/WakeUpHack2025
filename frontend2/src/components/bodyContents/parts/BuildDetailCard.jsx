@@ -1,19 +1,12 @@
-// BuildDetailCard.jsx
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./buildDetailCard.css";
 
-import { useState } from "react";
-
 /**
- * 物件詳細カードコンポーネント
+ * 物件詳細カードコンポーネント（画像1枚）
  */
 const BuildDetailCard = ({
-  images = [],
+  image, // 画像のURLを受け取る
   address,
   cleaningFrequency,
   rooms,
@@ -22,50 +15,41 @@ const BuildDetailCard = ({
   saleIntent,
   agents = [],
 }) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [selectedAgents, setSelectedAgents] = useState([]); // チェックボックスの選択状態を管理
+  const navigate = useNavigate(); // useNavigate フックを使ってリダイレクト
+
+  const handleAgentChange = (event, agentIndex) => {
+    if (event.target.checked) {
+      setSelectedAgents([...selectedAgents, agentIndex]); // チェックされたエージェントを追加
+    } else {
+      setSelectedAgents(selectedAgents.filter((index) => index !== agentIndex)); // チェックが外れたエージェントを削除
+    }
+  };
+
+  const handleSubmit = () => {
+    // チェックボックスが選択されている場合、確認画面へのURLにリダイレクト
+    if (selectedAgents.length > 0) {
+      navigate("/mypage/report/confirmation_wanted"); // チェックボックスが選択されている場合
+    } else {
+      navigate("/mypage/report/confirmation"); // 何も選択されていない場合
+    }
+  };
 
   return (
     <div className="build-detail-card">
-      {/* 左側：画像部分まとめ */}
-      <div className="build-detail-card-left">
-        {/* メイン画像スライダー */}
-        <Swiper
-          modules={[Navigation, Thumbs]}
-          spaceBetween={10}
-          navigation
-          thumbs={{ swiper: thumbsSwiper }}
-          className="main-swiper"
-        >
-          {images.map((img, idx) => (
-            <SwiperSlide key={idx}>
-              <img
-                src={img}
-                alt={`建物画像${idx}`}
-                className="build-detail-card-img"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      {/* 画像エリア（左側） */}
+      <section className="build-detail-card-left">
+        {/* メイン画像 */}
+        <img
+          src={image}
+          alt="建物画像"
+          className="build-detail-card-img"
+        />
+      </section>
 
-        {/* サムネイルスライダー */}
-        <Swiper
-          modules={[Thumbs]}
-          onSwiper={setThumbsSwiper}
-          spaceBetween={10}
-          slidesPerView={4}
-          watchSlidesProgress
-          className="thumbs-swiper"
-        >
-          {images.map((img, idx) => (
-            <SwiperSlide key={idx}>
-              <img src={img} alt={`サムネイル${idx}`} className="thumb-img" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-
-      {/* 右側：物件詳細情報 */}
-      <div className="build-detail-card-info">
+      {/* 右側エリア */}
+      <section className="build-detail-card-right">
+        {/* 物件基本情報（上部） */}
         <div className="detail-property-info">
           <div>
             <strong>住所:</strong> {address}
@@ -87,19 +71,35 @@ const BuildDetailCard = ({
           </div>
         </div>
 
+        {/* 横線 */}
         <div className="build-detail-card-divider" />
 
+        {/* 担当者＆アップロード（下部） */}
         <div className="detail-person-info">
           <div className="detail-person-label">【担当者】</div>
-          <div className="detail-person-links">
+          <div className="agent-list">
             {agents.map((agent, index) => (
-              <a key={index} href={`/担当者/${agent}`}>
-                {agent}
-              </a>
+              <div key={index} className="agent-item">
+                <input
+                  type="checkbox"
+                  id={`agent-${index}`}
+                  onChange={(e) => handleAgentChange(e, index)} // チェックボックスの変更を監視
+                />
+                <label htmlFor={`agent-${index}`}>{agent}</label>
+              </div>
             ))}
           </div>
         </div>
-      </div>
+
+        <div className="upload-section">
+          <label htmlFor="report-upload" className="upload-label">
+            報告書アップロード
+          </label>
+          <input type="file" id="report-upload" className="upload-input" />
+        </div>
+
+        <button className="submit-button" onClick={handleSubmit}>確認する</button>
+      </section>
     </div>
   );
 };

@@ -1,0 +1,115 @@
+/* previewCard.css */
+
+/* プレビューカードのベーススタイル */
+.preview-card {
+    display: flex;
+    width: 80vw;
+    height: 70vh;
+    border-radius: 20px;
+    border: 4.5px solid rgba(0, 173, 173, 0.60);
+    background: #EFF;
+    box-shadow: 4px 4px 4px 0px rgba(0, 207, 207, 0.25);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* 画像エリア（左側） */
+  .preview-card-left {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  /* メイン画像 */
+  .preview-card-img {
+    width: 255px;
+    height: 255px;
+    object-fit: cover;
+    border: 1px solid black;
+    background-color: white;
+  }
+  
+  /* 右側エリア */
+  .preview-card-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 60%;
+  }
+  
+  /* 物件情報エリア（上部） */
+  .preview-property-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 18px;
+    overflow-y: auto;
+  }
+  
+  /* 横線 */
+  .preview-card-divider {
+    height: 1px;
+    background-color: rgba(0, 173, 173, 0.60);
+    margin: 10px 0;
+  }
+  
+  /* 担当者情報エリア（中部） */
+  .preview-person-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 18px;
+    overflow-y: scroll;
+    max-height: 200px;
+  }
+  
+  /* 担当者リスト */
+  .agent-list {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  /* 担当者アイテム */
+  .agent-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* 提出ボタン */
+  .preview-submit-button {
+    margin-top: 20px;
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #00adad;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .preview-submit-button:hover {
+    background-color: #008c8c;
+  }
+  
+/* アップロードファイル情報 */
+.uploaded-file-info {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .uploaded-file-info strong {
+    color: #00adad;
+  }
+  
