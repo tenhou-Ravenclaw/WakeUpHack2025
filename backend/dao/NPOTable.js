@@ -68,7 +68,6 @@ function getAllNPOs() {
 module.exports = {
     setNPOData,
     getNPOData,
-    getNPOByEmail,
     updateNPOData,
     getAllNPOs
 };

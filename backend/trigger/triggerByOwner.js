@@ -52,7 +52,7 @@ function deleteBuildTrigger(buildId){
 }
 
 // 家の購入許可が出たトリガー
-function onPurchaseApproved(buildId,jobSercherId) {
+function onPurchaseApprovedTrigger(buildId,jobSercherId) {
     onPurchaseApproved(buildId,jobSercherId);
 }
 
@@ -60,5 +60,5 @@ module.exports = {
     onPropertyRegistered, 
     WorkBuildByOwnerTrigger, 
     deleteBuildTrigger,
-    onPurchaseApproved
+    onPurchaseApprovedTrigger
 };
