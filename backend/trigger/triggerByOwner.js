@@ -6,7 +6,7 @@ const { mattingBetweenWorksearcherAndBuild } = require('../algorythm/matting');
 const { WorkBuildByOwner } = require('../algorythm/agreeWork')
 const { onPurchaseApproved } = require('../algorythm/buy')
 // 物件が登録された際のトリガー
-function onPropertyRegistered(
+async function onPropertyRegistered(
     ownerId,
     location,
     roomSize,
@@ -19,42 +19,73 @@ function onPropertyRegistered(
     assignedJobSearcherId,
     deleteFlag
 ) {
-    addBuildData(
-        ownerId,
-        location,
-        roomSize,
-        numberOfRooms,
-        neglectPeriod,
-        cleaningFrequency,
-        roomPictureURL,
-        deedPictureURL,
-        sellIntention,
-        assignedJobSearcherId,
-        deleteFlag
-    )
-    matting(buildId);
+    try {
+        await addBuildData(
+            ownerId,
+            location,
+            roomSize,
+            numberOfRooms,
+            neglectPeriod,
+            cleaningFrequency,
+            roomPictureURL,
+            deedPictureURL,
+            sellIntention,
+            assignedJobSearcherId,
+            deleteFlag
+        );
+        await matting(ownerId); // buildIdをownerIdに修正（適切な引数を渡す必要がある）
+        console.log(`物件ID ${ownerId} の登録が成功しました`);
+    } catch (error) {
+        console.error(`物件登録中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
-function matting(buildId) {
-    const num = needHumanNum(buildId);
-    mattingBetweenWorksearcherAndBuild(num);
+
+async function matting(buildId) {
+    try {
+        const num = await needHumanNum(buildId);
+        await mattingBetweenWorksearcherAndBuild(buildId, num);
+        console.log(`物件ID ${buildId} のマッチングが成功しました`);
+    } catch (error) {
+        console.error(`物件ID ${buildId} のマッチング中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
 // 働く人に問題がないかを送ってもらったトリガー
-function WorkBuildByOwnerTrigger(buildId,jobSercherIds/*int[]*/) {
-    WorkBuildByOwner(buildId,jobSercherIds);
+async function WorkBuildByOwnerTrigger(buildId, jobSercherIds /* int[] */) {
+    try {
+        await WorkBuildByOwner(buildId, jobSercherIds);
+        console.log(`物件ID ${buildId} の作業者登録が成功しました`);
+    } catch (error) {
+        console.error(`物件ID ${buildId} の作業者登録中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
 // 家が売れたなどで、物件を消すトリガー
-function deleteBuildTrigger(buildId){
-    deleteBuildData(buildId);
-    deleteWorker(buildId);
-    notificationDeleteBuildDate(buildId);
+async function deleteBuildTrigger(buildId) {
+    try {
+        await deleteBuildData(buildId);
+        await deleteWorker(buildId);
+        await notificationDeleteBuildDate(buildId);
+        console.log(`物件ID ${buildId} の削除が成功しました`);
+    } catch (error) {
+        console.error(`物件ID ${buildId} の削除中にエラーが発生しました:`, error);
+        throw error; // 必要に応じてエラーを再スロー
+    }
 }
 
 // 家の購入許可が出たトリガー
-function onPurchaseApprovedTrigger(buildId,jobSercherId) {
-    onPurchaseApproved(buildId,jobSercherId);
+async function onPurchaseApprovedTrigger(buildId, jobSercherId) {
+    try {
+        await onPurchaseApproved(buildId, jobSercherId);
+        console.log(`物件ID ${buildId} の購入許可が成功しました`);
+    } catch (error) {
+        console.error(`物件ID ${buildId} の購入許可中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
 // サインアップようのトリガー
@@ -80,7 +111,7 @@ async function signUpTrigger(name, birthday, payWay, pwd, mailAddress) {
 async function loginTrigger(mailAddress, pwd) {
     try {
         const owner = await getOwnerByEmail(mailAddress);
-        
+        console.log(owner);
         if (!owner) {
             return false;
         }

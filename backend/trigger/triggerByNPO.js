@@ -6,39 +6,67 @@ const { addReport } = require('../dao/report')
 const { deleteWorkJobSearcher } = require('../dao/jobsearcherTable')
 
 // 被修飾希望者の登録
-function registerJobSercher(name, birthday, sex, rangeOfBehivior, transportation, isEmployed, wantedBuildId, assignedBuildId, NPOId) {
-    addJobsercher(
-        name,
-        birthday,
-        sex,
-        rangeOfBehivior,
-        transportation,
-        isEmployed,
-        wantedBuildId,
-        assignedBuildId,
-        NPOId
-    );
+async function registerJobSercher(jobSercherData) {
+    try {
+        await addJobSercher(jobSercherData);
+        console.log(`担当者の登録が成功しました:`, jobSercherData);
+    } catch (error) {
+        console.error(`担当者の登録中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
-function registerReport(buildId, image) {
-    addReport(buildId, image)
+// レポート登録
+async function registerReport(buildId, image) {
+    try {
+        await addReport(buildId, image);
+        console.log(`物件ID ${buildId} のレポート登録が成功しました`);
+    } catch (error) {
+        console.error(`物件ID ${buildId} のレポート登録中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
 // 働く担当者の確定
-function agreeWorkBuildByNPOTregger(jobSercherId,buildIds){
-    agreeWorkBuildByNPO(jobSercherId,buildIds);
+async function agreeWorkBuildByNPOTregger(jobSercherId, buildIds) {
+    try {
+        await agreeWorkBuildByNPO(jobSercherId, buildIds);
+        console.log(`担当者ID ${jobSercherId} の物件確定が成功しました`);
+    } catch (error) {
+        console.error(`担当者ID ${jobSercherId} の物件確定中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
 // ホームレスの削除
-function deleteJobSercherTrigger(workJobSercherId) {
-    deleteWorkJobSearcher(workJobSercherId);
-    // もし担当している家が残っていたら、マッチングし直し
-    // matting();
+async function deleteJobSercherTrigger(workJobSercherId) {
+    try {
+        await deleteWorkJobSearcher(workJobSercherId);
+        console.log(`担当者ID ${workJobSercherId} の削除が成功しました`);
+
+        // もし担当している家が残っていたら、マッチングし直し
+        try {
+            await matting();
+            console.log(`担当者ID ${workJobSercherId} の再マッチングが成功しました`);
+        } catch (mattingError) {
+            console.error(`担当者ID ${workJobSercherId} の再マッチング中にエラーが発生しました:`, mattingError);
+            throw mattingError;
+        }
+    } catch (error) {
+        console.error(`担当者ID ${workJobSercherId} の削除中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
-//　購入希望が出た際の処理
-function wantHomeJobSearcherTrigger(jobSercherId, buildId) {
-    onPropertySold(jobSercherId, buildId);
+// 購入希望が出た際の処理
+async function wantHomeJobSearcherTrigger(jobSercherId, buildId) {
+    try {
+        await onPropertySold(jobSercherId, buildId);
+        console.log(`担当者ID ${jobSercherId} の物件ID ${buildId} の購入希望処理が成功しました`);
+    } catch (error) {
+        console.error(`担当者ID ${jobSercherId} の物件ID ${buildId} の購入希望処理中にエラーが発生しました:`, error);
+        throw error;
+    }
 }
 
 module.exports = {

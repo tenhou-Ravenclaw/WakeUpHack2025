@@ -18,12 +18,6 @@ app.get('/api', (req, res) => {
     res.send('Hello from the Node.js backend!');
 });
 
-app.get('/test', (req, res) => {
-    const { needHumanNum } = require('./algorythm/needHumanNum');
-    const result = needHumanNum(); // 必要な人員数を取得
-    res.json({ requiredWorkers: result }); // JSON形式でレスポンスを返す
-});
-
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
@@ -47,25 +41,25 @@ const {
 } = require('./trigger/triggerByOwner');
 
 // 被修飾希望者の登録
-app.post('/trigger/register-job-searcher', (req, res) => {
+app.post('/trigger/register-job-searcher', async (req, res) => {
     const { name, birthday, sex, rangeOfBehivior, transportation, isEmployed, wantedBuildId, assignedBuildId, NPOId } = req.body;
     try {
-        registerJobSercher(name, birthday, sex, rangeOfBehivior, transportation, isEmployed, wantedBuildId, assignedBuildId, NPOId);
+        await registerJobSercher({ name, birthday, sex, rangeOfBehivior, transportation, isEmployed, wantedBuildId, assignedBuildId, NPOId });
         res.status(200).json({ message: 'Job searcher registered successfully' });
     } catch (error) {
-        console.error(error);
+        console.error('被修飾希望者の登録中にエラーが発生しました:', error);
         res.status(500).json({ error: 'Failed to register job searcher' });
     }
 });
 
-// レポートの登録
-app.post('/trigger/register-report', (req, res) => {
+// レポート登録
+app.post('/trigger/register-report', async (req, res) => {
     const { buildId, image } = req.body;
     try {
-        registerReport(buildId, image);
+        await registerReport(buildId, image);
         res.status(200).json({ message: 'Report registered successfully' });
     } catch (error) {
-        console.error(error);
+        console.error(`レポート登録中にエラーが発生しました (buildId: ${buildId}):`, error);
         res.status(500).json({ error: 'Failed to register report' });
     }
 });
@@ -131,25 +125,25 @@ app.post('/trigger/work-build', (req, res) => {
 });
 
 // 家が売れたなどで物件を消すトリガー
-app.delete('/trigger/delete-build', (req, res) => {
+app.delete('/trigger/delete-build', async (req, res) => {
     const { buildId } = req.body;
     try {
-        deleteBuildTrigger(buildId);
+        await deleteBuildTrigger(buildId); // 非同期処理を待つ
         res.status(200).json({ message: 'Build deleted successfully' });
     } catch (error) {
-        console.error(error);
+        console.error(`物件削除中にエラーが発生しました (buildId: ${buildId}):`, error);
         res.status(500).json({ error: 'Failed to delete build' });
     }
 });
 
 // 家の購入許可が出たトリガー
-app.post('/trigger/purchase-approved', (req, res) => {
+app.post('/trigger/purchase-approved', async (req, res) => {
     const { buildId, jobSercherId } = req.body;
     try {
-        onPurchaseApprovedTrigger(buildId, jobSercherId);
+        await onPurchaseApprovedTrigger(buildId, jobSercherId); // 非同期処理を待つ
         res.status(200).json({ message: 'Purchase approved successfully' });
     } catch (error) {
-        console.error(error);
+        console.error(`購入許可処理中にエラーが発生しました (buildId: ${buildId}, jobSercherId: ${jobSercherId}):`, error);
         res.status(500).json({ error: 'Failed to approve purchase' });
     }
 });
@@ -159,22 +153,32 @@ app.post('/trigger/sign-up', async (req, res) => {
     console.log('サインアップ');
     const { name, birthday, payWay, pwd, mailAddress } = req.body;
     try {
-        await signUpTrigger(name, birthday, payWay, pwd, mailAddress);
-        res.status(200).json({ message: 'Sign up processed successfully' });
+        const result = await signUpTrigger(name, birthday, payWay, pwd, mailAddress); // 非同期処理を待つ
+        if (result.success) {
+            res.status(200).json({ message: 'Sign up processed successfully', data: result.result });
+        } else {
+            res.status(400).json({ error: 'Sign up failed', details: result.error });
+        }
     } catch (error) {
-        console.error(error);
+        console.error('サインアップ処理中にエラーが発生しました:', error);
         res.status(500).json({ error: 'Failed to process sign up' });
     }
 });
+
 // ログイン用のトリガー
 app.post('/trigger/login', async (req, res) => {
     console.log('ログイン');
     const { email, password } = req.body;
+    console.log(`ログイン処理中: ${email}, ${password}`);
     try {
-        await loginTrigger(email, password);
-        res.status(200).json({ message: 'Login processed successfully' });
+        const isLoggedIn = await loginTrigger(email, password); // 非同期処理を待つ
+        if (isLoggedIn) {
+            res.status(200).json({ message: 'Login successful' });
+        } else {
+            res.status(401).json({ error: 'Invalid email or password' });
+        }
     } catch (error) {
-        console.error(error);
+        console.error(`ログイン処理中にエラーが発生しました (mailAddress: ${email}):`, error);
         res.status(500).json({ error: 'Failed to process login' });
     }
 });
