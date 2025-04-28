@@ -56,9 +56,45 @@ function onPurchaseApprovedTrigger(buildId,jobSercherId) {
     onPurchaseApproved(buildId,jobSercherId);
 }
 
+// サインアップようのトリガー
+function signUpTrigger(
+    name,
+    birthday,
+    payWay,
+    pwd,
+    mailAddress
+) {
+    // オーナーのサインアップ
+    addOwnerData(
+        name,
+        birthday,
+        payWay,
+        pwd,
+        mailAddress
+    )
+}
+
+// ログイン用のトリガー
+function loginTrigger(
+    mailAddress,
+    pwd
+) {
+    // オーナーのログイン
+    getOwnerData(
+        mailAddress,
+        pwd
+    )
+    if (getOwnerData) {
+        return true;
+    }
+    return false;
+}
+
 module.exports = {
     onPropertyRegistered, 
     WorkBuildByOwnerTrigger, 
     deleteBuildTrigger,
-    onPurchaseApprovedTrigger
+    onPurchaseApprovedTrigger,
+    signUpTrigger,
+    loginTrigger
 };

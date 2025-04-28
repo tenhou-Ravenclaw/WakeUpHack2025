@@ -34,14 +34,16 @@ const {
     registerReport, 
     agreeWorkBuildByNPOTregger, 
     deleteJobSercherTrigger, 
-    wantHomeJobSearcherTrigger 
+    wantHomeJobSearcherTrigger,
 } = require('./trigger/triggerByNPO');
 
 const { 
     onPropertyRegistered, 
     WorkBuildByOwnerTrigger, 
     deleteBuildTrigger, 
-    onPurchaseApprovedTrigger 
+    onPurchaseApprovedTrigger,
+    signUpTrigger,
+    loginTrigger,
 } = require('./trigger/triggerByOwner');
 
 // 被修飾希望者の登録
@@ -149,5 +151,30 @@ app.post('/trigger/purchase-approved', (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to approve purchase' });
+    }
+});
+
+// サインアップ用のトリガー
+app.post('/trigger/sign-up', (req, res) => {
+    console.log('サインアップ');
+    const { name, birthday, payWay, pwd, mailAddress } = req.body;
+    try {
+        signUpTrigger(name, birthday, payWay, pwd, mailAddress);
+        res.status(200).json({ message: 'Sign up processed successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to process sign up' });
+    }
+});
+// ログイン用のトリガー
+app.post('/trigger/login', (req, res) => {
+    console.log('ログイン');
+    const { email, password } = req.body;
+    try {
+        loginTrigger(email, password);
+        res.status(200).json({ message: 'Login processed successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to process login' });
     }
 });

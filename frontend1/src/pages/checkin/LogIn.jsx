@@ -22,8 +22,32 @@ export default function OwnerLoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('ログインデータ', form);
-    // ここでログイン処理が成功したらマイページへ遷移
-    navigate('/mypage');
+    // ここでログイン処理を行う    
+    fetch('http://0.0.0.0:5001/trigger/login', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    })
+      .then((response) => {
+      if (!response.ok) {
+        throw new Error('ログインに失敗しました');
+      }
+      return response.json();
+      })
+      .then((data) => {
+      console.log('ログイン成功:', data);
+      navigate('/mypage');
+      })
+      .catch((error) => {
+      console.error('エラー:', error);
+      alert('ログインに失敗しました。もう一度お試しください。');
+      });
+    // e.preventDefault();
+    // console.log('ログインデータ', form);
+    // // ここでログイン処理が成功したらマイページへ遷移
+    // navigate('/mypage');
   };
   
 
