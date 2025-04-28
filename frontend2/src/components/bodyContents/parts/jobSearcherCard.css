@@ -1,0 +1,49 @@
+.job-searcher-card {
+    width: 470px;
+    height: 150px;
+    border-radius: 20px;
+    border: 4.5px solid rgba(0, 173, 173, 0.60);
+    background: #fff;
+    box-shadow: 4px 4px 4px 0px rgba(0, 173, 173, 0.25);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; /* 左右に分ける */
+    align-items: center;
+    text-align: left;
+  }
+  
+  .left-info {
+    width: 70%; /* 左側の情報部分 */
+  }
+  
+  .info-item {
+    display: flex;
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+  
+  .info-label {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .detail-button {
+    width: 100px;
+    height: 80px;
+    background-color: #00AAFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .detail-button:hover {
+    background-color: #0088cc; /* ホバー時の色を少し暗く */
+  }
+  

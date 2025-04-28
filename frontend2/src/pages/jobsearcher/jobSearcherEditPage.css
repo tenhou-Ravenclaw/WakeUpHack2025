@@ -1,0 +1,101 @@
+.job-searcher-edit-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px; /* 上下40px, 左右20pxの余白 */
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 100px auto; /* 上に50pxの余白を加え、中央に配置 */
+    box-sizing: border-box;
+    max-height: 800px; /* 最大高さを800pxに制限 */
+    overflow-y: auto; /* コンテンツが長くなった場合はスクロール可能にする */
+}
+
+
+  
+  h2 {
+    margin-bottom: 30px;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .input-item {
+    margin-bottom: 20px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+  }
+  
+  input:focus, select:focus {
+    border-color: #19F;
+  }
+  
+  .transport-options {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .transport-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+/* ボタンを並べるコンテナ */
+.form-buttons {
+    display: flex; /* 横並びに配置 */
+    justify-content: space-between; /* ボタン間のスペースを均等に */
+    width: 100%; /* コンテナの幅を100%に */
+    max-width: 500px; /* 最大幅を設定して中央に配置 */
+    margin: 0 auto; /* 横方向のマージンを自動にして中央寄せ */
+    padding: 20px 0; /* 上下に余白を追加 */
+}
+
+/* 保存ボタン */
+.save-button {
+    background-color: #00AAFF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 48%; /* ボタン幅を調整して左右対称に */
+}
+
+/* 保存ボタンのホバー */
+.save-button:hover {
+    background-color: #0077CC;
+    transform: scale(1.05);
+}
+
+/* キャンセルボタン */
+.cancel-button {
+    background-color: #FF5555;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 48%; /* ボタン幅を調整して左右対称に */
+}
+
+/* キャンセルボタンのホバー */
+.cancel-button:hover {
+    background-color: #FF3333;
+    transform: scale(1.05);
+}
