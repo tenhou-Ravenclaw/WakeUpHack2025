@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MyPage from "./pages/mypage/MyPage";
-import Login from "./pages/login/Login";
-import Signup from "./pages/signup/Signup";
-import SetCredit from "./pages/setcredit/SetCredit";
-import SetBuild from "./pages/mypage/setbuild/SetBuild";
-import ReportList from "./pages/mypage/reportList/ReportList";
-import CheckSell from "./pages/checksell/CheckSell";
+import Login from "./pages/checkin/LogIn";
+import Signup from "./pages/checkin/SignUp";
+import SetCredit from "./pages/checkin/SetCredit";
+import SetBuild from "./pages/mypage/SetBuild";
+import ReportList from "./pages/mypage/ReportList";
+import CheckSell from "./pages/checkin/CheckSell";
 function App() {
   return (
     <Router>
