@@ -18,6 +18,12 @@ app.get('/api', (req, res) => {
     res.send('Hello from the Node.js backend!');
 });
 
+app.get('/test', (req, res) => {
+    const { needHumanNum } = require('./algorythm/needHumanNum');
+    const result = needHumanNum(); // 必要な人員数を取得
+    res.json({ requiredWorkers: result }); // JSON形式でレスポンスを返す
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
