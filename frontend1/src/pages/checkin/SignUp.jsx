@@ -31,7 +31,35 @@ export default function SignUpPage() {
 
   const handleJoin = () => {
     console.log('入会ボタン押した');
-    // 入会ボタン押したときの処理も同様に /login へ
+    // ここで入会処理を行う
+    const requestData = {
+      name: `${form.lastName} ${form.firstName}`,
+      birthday: form.birthDate,
+      payWay: null,
+      pwd: form.password,
+      mailAddress: form.email,
+    };
+
+    fetch('http://0.0.0.0:5001/trigger/sign-up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
     navigate('/login');
   };
 

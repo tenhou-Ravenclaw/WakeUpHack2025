@@ -1,4 +1,5 @@
 const { addBuildData, deleteBuildData, deleteWorker, notificationDeleteBuildDate } = require('../dao/buildTable');
+const { getOwner, addOwner } = require('../dao/ownerTable');
 
 const { needHumanNum } = require('../algorythm/needHumanNum');
 const { mattingBetweenWorksearcherAndBuild } = require('../algorythm/matting');
@@ -65,7 +66,7 @@ function signUpTrigger(
     mailAddress
 ) {
     // オーナーのサインアップ
-    addOwnerData(
+    addOwner(
         name,
         birthday,
         payWay,
@@ -80,11 +81,11 @@ function loginTrigger(
     pwd
 ) {
     // オーナーのログイン
-    getOwnerData(
+    const owner = getOwner(
         mailAddress,
         pwd
     )
-    if (getOwnerData) {
+    if (owner) {
         return true;
     }
     return false;
