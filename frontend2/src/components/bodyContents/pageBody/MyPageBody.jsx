@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // useNavigateをインポート
 import SubTitle from "../../upperBar/SubTitle"; // SubTitleコンポーネントをインポート
-import "./mypageBody.css";
+import "./myPageBody.css";
 
 /**
  * マイページのBody書いてます

@@ -1,5 +1,5 @@
 import React from "react";
-import "./BuildCard.css";
+import "./buildCard.css";
 
 /**
  * 一覧表示する時用の物件カード

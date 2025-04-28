@@ -16,6 +16,7 @@ import BuildSalePage                              from "./pages/sale/BuildSalePa
 
 function App() {
   return (
+    <>
     <Router> {/* アプリケーション全体で1回だけ使用 */}
       <Routes>
         <Route path="/login"                             element={<Login />} />
@@ -33,6 +34,9 @@ function App() {
         <Route path="/mypage/sale"                       element={<BuildSalePage />} />
       </Routes>
     </Router>
+    <h1>Hello World</h1>
+    <a href="/login">Go to Login</a>
+    </>
   );
 }
 
