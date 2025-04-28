@@ -57,5 +57,6 @@ function onPurchaseApproved(buildId,jobSercherId) {
 module.exports = {
     onPropertyRegistered, 
     WorkBuildByOwnerTrigger, 
-    deleteBuildTrigger
+    deleteBuildTrigger,
+    onPurchaseApproved
 };

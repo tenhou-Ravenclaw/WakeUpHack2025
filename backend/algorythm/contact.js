@@ -77,3 +77,10 @@ async function sendMail(to, subject, message) {
         console.error('Error sending email: ', error);
     }
 }
+module.exports = {
+    contactOwner,
+    contactNPO,
+    contactOwnerForWorkBuild,
+    contactNPOForWorkBuild,
+    notificationDeleteBuildDate
+};

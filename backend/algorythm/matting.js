@@ -1,15 +1,42 @@
-function mattingBetweenWorksearcherAndBuild(params) {//引数(物件情報,必要人数)
-    // 位置関係を見て担当できるホームレスを見つける
-    // buildIdから物件の取得、build.Locationから(緯度,経度)を取得
-    // jobSercher一覧から、RangeOfBehiviorを取得(緯度1,経度1,緯度2,経度2)
-    //　範囲内にbuildIdがあればマッチ
-    // もし見つかれば、必要な人数分をNPOに送信。いなければ、mattchWorksearcherを空で送信
-    /* 
-    {
-    buildId:int,
-    mattchWorksearcher:jobSercherId(int)[]    
+/**
+ * 
+ * @param {int} buildId 
+ * @param {int} requiredPeople 
+ * @returns int[]
+ */
+async function mattingBetweenWorksearcherAndBuild(buildId,requiredPeople) {
+    // 物件情報を取得
+    const build = await getBuildById(buildId);
+    if (!build) {
+        return { buildId, mattchWorksearcher: [] };
     }
-     */
-}
 
+    const { latitude: buildLat, longitude: buildLon } = build.location;
+
+    // 求職者一覧を取得
+    const jobSearchers = await getJobSearchers();
+
+    // 範囲内の求職者をフィルタリング
+    const matchedWorksearchers = jobSearchers.filter((jobSearcher) => {
+        const { rangeOfBehavior } = jobSearcher;
+        const [lat1, lon1, lat2, lon2] = rangeOfBehavior;
+
+        return (
+            buildLat >= Math.min(lat1, lat2) &&
+            buildLat <= Math.max(lat1, lat2) &&
+            buildLon >= Math.min(lon1, lon2) &&
+            buildLon <= Math.max(lon1, lon2)
+        );
+    });
+
+    // 必要人数分を選択
+    const selectedWorksearchers = matchedWorksearchers.slice(0, requiredPeople).map(ws => ws.id);
+
+    // NPOに送信
+    if (selectedWorksearchers.length > 0) {
+        await contactNPOForWorkBuild({ buildId, selectedWorksearchers });
+    }
+
+    return { buildId, mattchWorksearcher: selectedWorksearchers };
+}
 module.exports = { mattingBetweenWorksearcherAndBuild };
