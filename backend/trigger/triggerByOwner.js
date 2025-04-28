@@ -12,15 +12,15 @@ async function onPropertyRegistered(
     roomSize,
     numberOfRooms,
     neglectPeriod,
-    cleaningFrequency,
-    roomPictureURL,
-    deedPictureURL,
-    sellIntention,
-    assignedJobSearcherId,
-    deleteFlag
+    cleaningFrequency = null, // デフォルト値を設定
+    roomPictureURL = null,   // デフォルト値を設定
+    deedPictureURL = null,   // デフォルト値を設定
+    sellIntention = 3,
+    assignedJobSearcherId = null,
+    deleteFlag = false
 ) {
     try {
-        await addBuildData(
+        console.log('登録データ:', {
             ownerId,
             location,
             roomSize,
@@ -31,9 +31,23 @@ async function onPropertyRegistered(
             deedPictureURL,
             sellIntention,
             assignedJobSearcherId,
+            deleteFlag,
+        });
+
+        await addBuildData(
+            ownerId,
+            location,
+            roomSize,
+            numberOfRooms,
+            neglectPeriod,
+            cleaningFrequency,
+            "roomPictureURL",
+            "deedPictureURL",
+            sellIntention,
+            assignedJobSearcherId,
             deleteFlag
         );
-        await matting(ownerId); // buildIdをownerIdに修正（適切な引数を渡す必要がある）
+
         console.log(`物件ID ${ownerId} の登録が成功しました`);
     } catch (error) {
         console.error(`物件登録中にエラーが発生しました:`, error);

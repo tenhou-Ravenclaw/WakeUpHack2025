@@ -1,13 +1,13 @@
 const db = require('../connectDB');
 
-function addBuildData(buildId, ownerId, location, roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) {
+function addBuildData(ownerId, location, roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) {
     return new Promise((resolve, reject) => {
         const query = `
             INSERT INTO build 
-            (buildId, ownerId, location, roomSize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (ownerId, location, roomSize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
-        const values = [buildId, ownerId, JSON.stringify(location), roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag];
+        const values = [ ownerId, JSON.stringify(location), roomsize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag];
 
         db.query(query, values, (err, results) => {
             if (err) {

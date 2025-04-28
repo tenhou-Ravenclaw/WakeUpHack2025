@@ -102,7 +102,7 @@ app.post('/trigger/want-home', (req, res) => {
 
 // 物件が登録された際の処理
 app.post('/trigger/property-registered', (req, res) => {
-    const { ownerId, location, roomSize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag } = req.body;
+    const { ownerId, location, roomSize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL = "null", deedPictureURL = "null", sellIntention = 3, assignedJobSearcherId, deleteFlag =false } = req.body;
     try {
         onPropertyRegistered(ownerId, location, roomSize, numberOfRooms, neglectPeriod, cleaningFrequency, roomPictureURL, deedPictureURL, sellIntention, assignedJobSearcherId, deleteFlag);
         res.status(200).json({ message: 'Property registered successfully' });

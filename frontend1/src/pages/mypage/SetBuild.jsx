@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderComponent from "../../components/Header"
 
-const TextInputBox = ({ label }) => {
+const TextInputBox = ({ label, name }) => {
     const labelStyle = {
         fontSize: "32px",
         marginLeft: "50px"
@@ -22,12 +22,12 @@ const TextInputBox = ({ label }) => {
             <label htmlFor={id} style={labelStyle}>
                 {label}
             </label>
-            <input type="text" style={inputStyle}/>
+            <input type="text" style={inputStyle} name={name}/>
         </div>
     );
 };
 
-const NumberInputBox = ({ label }) => {
+const NumberInputBox = ({ label, name }) => {
     const labelStyle = {
         fontSize: "32px",
         marginLeft: "50px"
@@ -48,11 +48,11 @@ const NumberInputBox = ({ label }) => {
             <label htmlFor={id} style={labelStyle}>
                 {label}
             </label>
-            <input type="number" style={inputStyle}/>
+            <input type="number" style={inputStyle} name={name}/>
         </div>
     );
 };
-const ImageInputBox = ({ label }) => {
+const ImageInputBox = ({ label, name }) => {
     const labelStyle = {
         fontSize: "32px",
         marginLeft: "50px"
@@ -72,7 +72,7 @@ const ImageInputBox = ({ label }) => {
             <label htmlFor={id} style={labelStyle}>
                 {label}
             </label>
-            <input type="file" accept="image/*" style={inputStyle}/>
+            <input type="file" accept="image/*" style={inputStyle} name={name}/>
         </div>
     );
 }
@@ -111,20 +111,62 @@ const SetBuild = () => {
         fontSize: '48px'
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const ownerId = localStorage.getItem("ownerId");
+        const data = {
+            ownerId: ownerId,
+            location: formData.get("location"),
+            roomSize: formData.get("roomSize"),
+            numberOfRooms: formData.get("numberOfRooms"),
+            cleaningFrequency: formData.get("cleaningFrequency"),
+            neglectPeriod: formData.get("neglectPeriod"),
+            roomPictureURL: formData.get("roomPictureURL"),
+            deedPictureURL: formData.get("deedPictureURL"),
+            sellIntent: formData.get("sellIntent"),
+        };
+        console.log(data);
+
+        fetch('http://0.0.0.0:5001/trigger/property-registered', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((result) => {
+                console.log('Success:', result);
+                alert('物件が登録されました！');
+                window.location.href = "/mypage";
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('登録中にエラーが発生しました。');
+            });
+    };
+
     return (
         <div>
             <HeaderComponent>
                 <img src="/SetBuild.png" alt="画像エラー" style={imgStyle} />
                 <p style={titleStyle}>物件を登録</p>
             </HeaderComponent>
-            <form>
-                <TextInputBox label="物件の位置"/>
-                <TextInputBox label="物件の延べ大きさ"/>
-                <NumberInputBox label="部屋の数"/>
-                <NumberInputBox label="掃除の頻度(月何回)"/>
-                <NumberInputBox label="放置時間(月)"/>
-                <ImageInputBox label="物件の画像"/>
-                <ImageInputBox label="権利書のアップロード"/>
+            <form onSubmit={handleSubmit} >
+                <TextInputBox label="物件の位置" name="location"/>
+                <TextInputBox label="物件の延べ大きさ" name="roomSize"/>
+                <NumberInputBox label="部屋の数" name="numberOfRooms"/>
+                <NumberInputBox label="掃除の頻度(月何回)" name="cleaningFrequency"/>
+                <NumberInputBox label="放置時間(月)" name="neglectPeriod"/>
+                <ImageInputBox label="物件の画像" name="roomPictureURL"/>
+                <ImageInputBox label="権利書のアップロード" name="deedPictureURL"/>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
                     <label style={{ fontSize: "32px", marginLeft: "50px" }}>売却意思があるか</label>
                     <div style={{ marginLeft: "50vw", position: "fixed" }}>
@@ -140,7 +182,7 @@ const SetBuild = () => {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', width: '100%' }}>
                     <SetBuildButton>登録</SetBuildButton>
-                    <SetBuildButton>キャンセル</SetBuildButton>
+                    <SetBuildButton onClick={() => window.location.href = "/mypage"}>キャンセル</SetBuildButton>
                 </div>
             </form>
         </div>
