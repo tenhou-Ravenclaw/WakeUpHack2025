@@ -6,14 +6,20 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install production dependencies
+RUN npm install --production
+
+# Install mysql2 package
+RUN npm install mysql2
 
 # Copy the rest of the application code
 COPY . .
 
+# Set the port environment variable (if needed)
+ENV PORT=5000
+
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 5000
 
 # Command to run the application
 CMD ["node", "server.js"]
