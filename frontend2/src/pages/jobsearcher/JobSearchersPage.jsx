@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // useNavigateをインポート
 import UpperBar from "../../components/upperBar/UpperBar";
 import JobSearcherCard from "../../components/bodyContents/parts/JobSearcherCard";
-import "./JobSearchersPage.css";
+import "./jobSearchersPage.css";
 
 /**
  * 被就職支援者を管理するページ(被就職支援者一覧)

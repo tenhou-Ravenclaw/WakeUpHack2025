@@ -1,5 +1,5 @@
 import React from "react";
-import "./JobSearcherCard.css"; // CSSファイルをインポート
+import "./jobSearcherCard.css"; // CSSファイルをインポート
 
 /**
  * JobSearcherの表示カードコンポーネント

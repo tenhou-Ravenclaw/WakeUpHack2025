@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";  // useNavigateをインポート
-import "./BuildCard.css";
+import "./buildCard.css";
 
 /**
  * 一覧表示する時用の物件カード

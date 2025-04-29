@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Linkをインポート
-import "./JobSearcherDetailCard.css"; // CSSファイルをインポート
+import "./jobSearcherDetailCard.css"; // CSSファイルをインポート
 
 /**
  * 被就職支援者の詳細情報を表示するカード
