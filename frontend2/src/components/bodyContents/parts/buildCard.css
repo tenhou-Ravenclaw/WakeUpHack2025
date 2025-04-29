@@ -1,0 +1,129 @@
+/* 物件カードのベーススタイル */
+.build-card {
+    width: 1020px;
+    height: 170px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 4.5px solid rgba(0, 173, 173, 0.60);
+    background: #EFF;
+    box-shadow: 4px 4px 4px 0px rgba(0, 207, 207, 0.25);
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  /* 画像スタイル */
+  .build-card-img {
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+    border: 1px solid black; /* 黒い枠線を追加 */
+    background-color: white;
+  }
+  
+  /* 縦線 */
+  .build-card-divider {
+    position: absolute;
+    left: 420px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 125px;
+    background: rgba(0, 173, 173, 0.60);
+    border-radius: 2px;
+  }
+  
+  /* 物件情報と担当者エリア */
+  .build-card-info {
+    display: flex;
+    flex-grow: 1;
+    padding-left: 20px; /* 縦線から20pxの距離を作る */
+  }
+  
+  /* 物件情報エリア */
+  .property-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    max-width: 480px; /* 左側（物件情報）の幅を調整 */
+  }
+  
+  /* 担当者情報エリア */
+  .person-info {
+    padding-left: 175px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* 行間を少し広げる */
+    font-size: 14px;
+  }
+  
+  /* 担当者ラベル */
+  .person-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* 右端に配置されるエリア（ボタンのための空間） */
+.button-area {
+  position: absolute;
+  right: 10px;  /* 右端に配置 */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 145px;  /* エリアの幅 */
+  height: 145px; /* エリアの高さ */
+  background-color: #AAEEEE; /* 色指定 */
+  border-radius: 10px;
+}
+
+/* ボタンエリアのスタイル */
+.button-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 縦方向に中央揃え */
+  align-items: center;  /* 横方向に中央揃え */
+  padding: 5px; /* ボタンエリアの上下左右に5pxの余白 */
+  position: absolute;
+  right: 5px; /* 右端に配置 */
+  top: 50%;  /* 垂直方向中央 */
+  transform: translateY(-50%);  /* 垂直方向の中央揃え */
+}
+
+/* ボタンの基本スタイル */
+.button-report, .button-check, .button-approve, .button-reject {
+  width: 100%;
+  padding: 16px;  /* 縦の高さを少し大きくする */
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  background-color: #00AAFF; /* デフォルトの背景色 */
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 5px 0; /* 上下に5pxのマージン */
+}
+
+.button-report:hover, .button-check:hover, .button-approve:hover, .button-reject:hover {
+  background-color: #007777; /* ホバー時の色 */
+}
+
+/* 物件管理登録の2つのボタン（縦並び） */
+.button-manage {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 5px;  /* 左右に5pxの余白 */
+  width: 100%;
+}
+
+/* 承認しないボタン（赤色） */
+.button-reject {
+  background-color: #FF5555; /* 承認しないボタンの背景色 */
+}
+
+.button-reject:hover {
+  background-color: #CC4444; /* 承認しないボタンのホバー時の色 */
+}

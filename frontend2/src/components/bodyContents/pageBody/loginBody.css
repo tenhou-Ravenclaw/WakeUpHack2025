@@ -1,0 +1,80 @@
+.login-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 縦方向中央揃え */
+    align-items: center; /* 横方向中央揃え */
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px; /* 最大幅を指定 */
+    margin-bottom: 20px; /* 入力欄とボタンの間隔 */
+  }
+  
+  label {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 8px;
+    text-align: left; /* ラベルは左詰め */
+  }
+  
+  .input-field {
+    width: 100%; /* 親要素の幅に合わせて100% */
+    max-width: 700px; /* 最大幅を700pxに制限 */
+    min-width: 600px; /* 最小幅を600pxに設定 */
+    height: 54px;
+    border: 2.5px solid #D9D9D9;
+    background: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .input-field:focus {
+    border-color: #19F;
+  }
+  
+  /* ログインボタンのスタイル */
+  .login-button-container {
+    display: flex;
+    justify-content: center; /* 横方向中央揃え */
+    width: 100%; /* 親要素の幅に合わせて100% */
+  }
+  
+  #loginButton {
+    width: 321px;
+    height: 95px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #19F;
+    border: none;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: normal;
+    position: relative;
+    top: 20px;
+  }
+  
+  /* ログインボタンにホバーした時 */
+  #loginButton:hover {
+    background: #1E90FF; /* ボタンの背景色を変更 */
+    cursor: pointer; /* マウスカーソルをポインターに */
+    transform: scale(1.05); /* 少し拡大する効果 */
+    transition: background 0.3s, transform 0.3s; /* ホバー時のトランジションを追加 */
+  }
+  

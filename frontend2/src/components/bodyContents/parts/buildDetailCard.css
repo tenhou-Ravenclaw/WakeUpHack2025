@@ -1,0 +1,147 @@
+/* 物件カードのベーススタイル */
+.build-detail-card {
+    display: flex; /* 横並び */
+    width: 80vw;
+    height: 70vh;
+    border-radius: 20px;
+    border: 4.5px solid rgba(0, 173, 173, 0.60);
+    background: #EFF;
+    box-shadow: 4px 4px 4px 0px rgba(0, 207, 207, 0.25);
+    padding: 20px;
+    box-sizing: border-box;
+}
+  
+/* 画像エリア（左側） */
+.build-detail-card-left {
+    width: 40%; /* 左側エリアは40%の幅 */
+    height: 100%; /* 高さは100% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px; /* 右側エリアと間隔を空ける */
+}
+  
+/* メイン画像 */
+.build-detail-card-img {
+    width: 255px;  /* 幅255px */
+    height: 255px; /* 高さ255px */
+    object-fit: cover;  /* 画像の縦横比を保ちつつ、枠内に収める */
+    border: 1px solid black;  /* 枠線 */
+    background-color: white;  /* 背景色 */
+}
+  
+/* 右側エリア */
+.build-detail-card-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* 高さ100% */
+    width: 60%; /* 右側エリアは60%の幅 */
+}
+  
+/* 物件情報エリア（上部） */
+.detail-property-info {
+    flex: 2; /* 物件情報の高さは2の割合 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 18px;
+    overflow-y: auto;
+}
+  
+/* 横線 */
+.build-detail-card-divider {
+    height: 1px;
+    background-color: rgba(0, 173, 173, 0.60);
+    margin: 10px 0;
+}
+  
+/* 担当者情報エリア（中部） */
+.detail-person-info {
+    flex: 2; /* 担当者の高さは2の割合 */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 18px;
+    overflow-y: scroll; /* スクロール可能 */
+    max-height: 200px; /* 担当者リストの最大高さ */
+}
+  
+/* 担当者リスト */
+.agent-list {
+    max-height: 150px; /* 担当者リストの最大高さ */
+    overflow-y: auto; /* スクロール可能 */
+}
+  
+/* 担当者アイテム */
+.agent-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  
+/* アップロードエリア（下部） */
+.upload-section {
+    flex: 1; /* アップロードエリアの高さは1の割合 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 16px;
+}
+  
+.upload-input {
+    width: 90%;
+}
+
+/* 提出ボタン */
+.submit-button {
+    margin-top: 20px;
+    align-self: flex-end; /* 右端に配置 */
+    padding: 10px 20px;
+    background-color: #00adad;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.submit-button:hover {
+    background-color: #008c8c;
+}
+  
+/* サムネイルの画像 */
+.thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid black;
+    background-color: white;
+}
+
+/* 購入志望物件ステータスボックス */
+.buy-status-box {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #eef;
+    border-radius: 10px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  /* ステータスのラベル */
+  .buy-status-box .info-label {
+    font-weight: bold;
+    color: #007b7b;
+    font-size: 17px;
+  }
+  
+  /* オーナー返答メッセージ */
+  .owner-reply-message {
+    font-size: 16px;
+    color: #333;
+    padding-left: 5px;
+  }
+  

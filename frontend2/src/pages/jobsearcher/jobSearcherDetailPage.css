@@ -1,0 +1,37 @@
+/* 編集ボタンと削除ボタンを右上に配置するコンテナ */
+.job-searcher-detail-buttons {
+    position: absolute;
+    top: 130px;
+    right: 5%;
+    display: flex;
+    gap: 25px;
+  }
+
+/* 編集ボタン */
+.edit-button, .delete-button {
+    width: 180px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* 編集ボタンのスタイル */
+  .edit-button {
+    background-color: #00AAFF;
+  }
+  
+  .edit-button:hover {
+    background-color: #0088cc;
+  }
+  
+  /* 削除ボタンのスタイル */
+  .delete-button {
+    background-color: #FF5555;
+  }
+  
+  .delete-button:hover {
+    background-color: #cc4444;
+  }

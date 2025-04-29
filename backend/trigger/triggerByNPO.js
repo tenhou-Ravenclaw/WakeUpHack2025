@@ -4,6 +4,7 @@ const { onPropertySold } = require('../algorythm/buy')
 const { addJobsercher } = require('../dao/jobsearcherTable');
 const { addReport } = require('../dao/report')
 const { deleteWorkJobSearcher } = require('../dao/jobsearcherTable')
+const { setNPOData, getNPOData } = require('../dao/NPOTable')
 
 // 被修飾希望者の登録
 async function registerJobSercher(jobSercherData) {
@@ -69,10 +70,41 @@ async function wantHomeJobSearcherTrigger(jobSercherId, buildId) {
     }
 }
 
+// サインアップ用のトリガー
+async function signUpNPOTrigger(_name, pwd, mailAddress) {
+    try {
+        await setNPOData(pwd, mailAddress);
+        console.log(`NPOのサインアップが成功しました:`, { pwd, mailAddress });
+        return true
+    } catch (error) {
+        console.error(`NPOのサインアップ中にエラーが発生しました:`, error);
+        throw error;
+    }
+}
+
+// サインイン用のトリガー
+async function signInNPOTrigger(pwd, mailAddress) {
+    try {
+        const npoData = await getNPOData(mailAddress); // NPOデータを取得
+        if (npoData && npoData.PWD === pwd) {
+            console.log(`NPOのサインインが成功しました:`, { mailAddress });
+            return { success: true, result: npoData };
+        } else {
+            console.error('サインイン失敗: パスワードが一致しません');
+            return { success: false, error: 'Invalid email or password' };
+        }
+    } catch (error) {
+        console.error(`NPOのサインイン中にエラーが発生しました:`, error);
+        throw error;
+    }
+}
+
 module.exports = {
     registerJobSercher,
     registerReport,
     agreeWorkBuildByNPOTregger,
     deleteJobSercherTrigger,
     wantHomeJobSearcherTrigger,
+    signUpNPOTrigger,
+    signInNPOTrigger
 };

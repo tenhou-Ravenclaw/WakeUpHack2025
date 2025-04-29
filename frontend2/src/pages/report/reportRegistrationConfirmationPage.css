@@ -1,0 +1,8 @@
+.preview-container {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 100vh; /* 高さ確保 */
+    box-sizing: border-box; /* パディング込みの高さ計算 */
+}
