@@ -29,6 +29,8 @@ const {
     agreeWorkBuildByNPOTregger, 
     deleteJobSercherTrigger, 
     wantHomeJobSearcherTrigger,
+    signUpNPOTrigger,
+    signInNPOTrigger,
 } = require('./trigger/triggerByNPO');
 
 const { 
@@ -199,5 +201,39 @@ app.get('/trigger/reports/:ownerId', async (req, res) => {
     } catch (error) {
         console.error(`報告書取得中にエラーが発生しました (ownerId: ${ownerId}):`, error);
         res.status(500).json({ error: 'Failed to fetch reports' });
+    }
+});
+
+// NPOユーザーのサインアップ用のトリガー
+app.post('/trigger/npo-sign-up', async (req, res) => {
+    console.log('NPOサインアップ');
+    const { name, pwd, mailAddress } = req.body;
+    try {
+        const result = await signUpNPOTrigger(name, pwd, mailAddress); // 非同期処理を待つ
+        if (result.success) {
+            res.status(200).json({ message: 'NPO sign up processed successfully', data: result.result });
+        } else {
+            res.status(400).json({ error: 'NPO sign up failed', details: result.error });
+        }
+    } catch (error) {
+        console.error('NPOサインアップ処理中にエラーが発生しました:', error);
+        res.status(500).json({ error: 'Failed to process NPO sign up' });
+    }
+});
+
+// NPOユーザーのサインイン用のトリガー
+app.post('/trigger/npo-sign-in', async (req, res) => {
+    console.log('NPOサインイン');
+    const { pwd, mailAddress } = req.body;
+    try {
+        const result = await signInNPOTrigger(pwd, mailAddress); // 非同期処理を待つ
+        if (result.success) {
+            res.status(200).json({ message: 'NPO sign in processed successfully', data: result.result });
+        } else {
+            res.status(401).json({ error: 'Invalid email or password' });
+        }
+    } catch (error) {
+        console.error('NPOサインイン処理中にエラーが発生しました:', error);
+        res.status(500).json({ error: 'Failed to process NPO sign in' });
     }
 });

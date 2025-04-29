@@ -12,6 +12,7 @@ import ReportRegistrationDetailPage               from "./pages/report/ReportReg
 import ReportRegistrationPage                     from "./pages/report/ReportRegistrationPage";  // 報告書登録ページ
 import BuildSaleDetailPage                        from "./pages/sale/BuildSaleDetailPage";  // 物件売買詳細ページ
 import BuildSalePage                              from "./pages/sale/BuildSalePage";  // 物件売買ページ
+import Hidden from "./Hidden";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/mypage/report/register"            element={<ReportRegistrationPage />} />
         <Route path="/mypage/sale/detail"                element={<BuildSaleDetailPage />} />
         <Route path="/mypage/sale/"                       element={<BuildSalePage />} />
+        <Route path="/hidden"                            element={<Hidden />} />
       </Routes>
     </Router>
     {/*<h1>Hello World</h1>

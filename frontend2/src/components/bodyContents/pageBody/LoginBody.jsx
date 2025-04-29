@@ -14,20 +14,27 @@ const LoginBody = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // 簡単なバリデーション
-    if (email === '' || password === '') {
-      setErrorMessage('メールアドレスとパスワードは必須です。');
-      return;
-    }
-
-    // 仮にログイン処理を行う（モック）
-    if (email === "test@unko" && password === "unko") {
-      alert("ログイン成功");
-      navigate('/mypage');  // ログイン成功後、MyPageに遷移
-    } else {
-      setErrorMessage('メールアドレスまたはパスワードが間違っています。');
-    }
+    fetch('http://0.0.0.0:5001/trigger/npo-sign-in', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('ログインに失敗しました');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // ログイン成功時の処理
+        navigate('/mypage'); // ダッシュボードページに遷移
+      })
+      .catch((error) => {
+        // エラーメッセージを設定
+        setErrorMessage(error.message);
+      });
   };
 
   return (
